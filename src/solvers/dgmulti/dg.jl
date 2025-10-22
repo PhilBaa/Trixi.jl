@@ -460,21 +460,21 @@ end
 
 # Specialize for nodal SBP discretizations. Uses that du = LIFT*u is equivalent to
 # du[Fmask,:] .= u ./ rd.wq[rd.Fmask]
-function calc_surface_integral!(du, u, mesh::DGMultiMesh, equations,
-                                surface_integral::SurfaceIntegralWeakForm,
-                                dg::DGMultiSBP, cache)
-    rd = dg.basis
-    @unpack flux_face_values, lift_scalings = cache
+# function calc_surface_integral!(du, u, mesh::DGMultiMesh, equations,
+#                                 surface_integral::SurfaceIntegralWeakForm,
+#                                 dg::DGMultiSBP, cache)
+#     rd = dg.basis
+#     @unpack flux_face_values, lift_scalings = cache
 
-    @threaded for e in eachelement(mesh, dg, cache)
-        for i in each_face_node(mesh, dg, cache)
-            fid = rd.Fmask[i]
-            du[fid, e] = du[fid, e] + flux_face_values[i, e] * lift_scalings[i]
-        end
-    end
+#     @threaded for e in eachelement(mesh, dg, cache)
+#         for i in each_face_node(mesh, dg, cache)
+#             fid = rd.Fmask[i]
+#             du[fid, e] = du[fid, e] + flux_face_values[i, e] * lift_scalings[i]
+#         end
+#     end
 
-    return nothing
-end
+#     return nothing
+# end
 
 # do nothing for periodic (default) boundary conditions
 function calc_boundary_flux!(cache, t, boundary_conditions::BoundaryConditionPeriodic,
