@@ -111,6 +111,7 @@ import SummationByPartsOperators: integrate, semidiscretize,
 # DGMulti solvers
 @reexport using StartUpDG: StartUpDG, Polynomial, Gauss, TensorProductWedge, SBP, Line, Tri,
                            Quad, Hex, Tet, Wedge
+export TensorProductWedgeSBP
 using StartUpDG: RefElemData, MeshData, AbstractElemShape
 
 # TODO: include_optimized
